@@ -9,6 +9,7 @@ app.use(express.json());
 
 //routes
 app.use(require('./routes/users'));
+app.use(require('./routes/login'));
 
 
 //starting the server
