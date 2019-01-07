@@ -8,11 +8,11 @@ app.set('port', process.env.PORT || 3000);
 app.use(express.json());
 
 //routes
-app.use(require('./routes/users'));
-app.use(require('./routes/login'));
+app.use('/user',require('./routes/users'));
+app.use('/login',require('../src/routes/login'));
 
 
 //starting the server
 app.listen(app.get('port'),()=>{
-console.log('server on port', app.get('port'));
+console.log('server iniciado');
 });

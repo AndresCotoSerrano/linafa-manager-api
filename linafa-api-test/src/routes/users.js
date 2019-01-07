@@ -3,7 +3,7 @@ const router = express.Router();
 
 
 //connection who brings data
-const mysqlConnection = require('../database');
+const mysqlConnection = require('../db/database');
 
 //consulta
 router.get('/', (req, res) => {

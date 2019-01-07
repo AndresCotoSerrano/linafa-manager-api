@@ -2,9 +2,9 @@ const mysql = require('mysql');
 
 const mysqlConnection = mysql.createConnection({
 
-    host: '192.168.0.16',
-    user: 'diego',
-    password: 'porque1ria',
+    host: '192.168.100.6',
+    user: 'root',
+    password: 'diegovrz',
     database: 'linafa_managerDB'
 });
 mysqlConnection.connect(function(err){
