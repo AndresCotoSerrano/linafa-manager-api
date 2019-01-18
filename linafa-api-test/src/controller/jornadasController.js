@@ -1,11 +1,11 @@
 const mysqlConnection = require('../db/database');
 
 module.exports = {
-    insertJornadas: (req, res) => {
+    insertJornadas: async (req, res) => {
 
        jornadas = req.body;
-
-        console.log(jornadas);
+      //  var pjornadas= JSON.parse(jornadas);
+        //console.log(pjornadas);
 
         for (var i in jornadas) {
 
@@ -25,7 +25,9 @@ module.exports = {
 
         }
 
-
+        mysqlConnection.on('error', function(err) {
+            console.log("[mysql error]",err);
+          });
 
 
     },
