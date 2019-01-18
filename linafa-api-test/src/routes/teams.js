@@ -4,6 +4,8 @@ const teamController = require('../controller/teamController');
 
 router.route('/')
 .post(teamController.insertTeams)
-.delete(teamController.deleteTeams)
+.delete(teamController.deleteTeams);
+
+router.route('/ver').post(teamController.verJson)
 
 module.exports = router
