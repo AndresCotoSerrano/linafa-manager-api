@@ -32,9 +32,7 @@ module.exports = {
                 }
             });
     },
-
-
-    showJornadas: (req, res) => (req, res) => {
+    showJornadas: (req, res) => {
         const { p_region_name, p_division_name, p_group_name } = req.body;
         let procedure = 'call jornadas_show_round(?,?,?)';
         mysqlConnection.query(procedure, [p_region_name, p_division_name, p_group_name],
@@ -48,7 +46,7 @@ module.exports = {
     },
 
 
-    uniqueJornada: (req, res) => (req, res) => {
+    uniqueJornada: (req, res) => {
         const { p_region_name, p_division_name, p_group_name } = req.body;
         let procedure = 'call jornada_near(?,?,?)';
         mysqlConnection.query(procedure, [p_region_name, p_division_name, p_group_name],
