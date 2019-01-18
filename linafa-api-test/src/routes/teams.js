@@ -6,6 +6,5 @@ router.route('/')
 .post(teamController.insertTeams)
 .delete(teamController.deleteTeams);
 
-router.route('/ver').post(teamController.verJson)
 
 module.exports = router
