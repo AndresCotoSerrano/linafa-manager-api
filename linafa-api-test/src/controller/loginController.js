@@ -3,6 +3,7 @@ module.exports = {
 
     validaLogin: (req, res) => {
         const {user_name,pass_login} = req.body;
+        console.log(user_name+" "+pass_login);
         let procedure = 'call login_access(?,?,?)'
         mysqlConnnection.query(procedure, [user_name,pass_login,''], (err, rows, fields) => {
             if (!err) {
@@ -12,5 +13,7 @@ module.exports = {
                console.log('error')
             }
         });
+
+        
     }
 }
