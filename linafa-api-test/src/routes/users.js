@@ -8,7 +8,7 @@ const mysqlConnection = require('../db/database');
 //consulta
 router.get('/', (req, res) => {
 
-    mysqlConnection.query('SELECT * FROM user_programa', (err, rows, fields) => {
+    mysqlConnection.query('call all_users()', (err, rows, fields) => {
 
         if (!err) {
 

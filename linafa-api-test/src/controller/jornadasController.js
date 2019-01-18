@@ -2,18 +2,32 @@ const mysqlConnection = require('../db/database');
 
 module.exports = {
     insertJornadas: (req, res) => {
-        const { p_round, p_jornada_name, p_region_name, p_division_name, p_group_name
-            , p_local_team_name, p_visitant_team_name } = req.body;
-        let procedure = 'call jornada_creation(?,?,?,?,?,?,?)';
-        mysqlConnection.query(procedure, [p_round, p_jornada_name, p_region_name, p_division_name
-            , p_group_name, p_local_team_name, p_visitant_team_name],
-            (err, rows, fields) => {
-                if (!err) {
-                    res.json(rows[0])
-                } else {
-                    console.log(err);
-                }
-            });
+
+       jornadas = req.body;
+
+        console.log(jornadas);
+
+        for (var i in jornadas) {
+
+            let procedure = 'call jornada_creation(?,?,?,?,?,?,?)';
+            mysqlConnection.query(procedure, [jornadas[i].p_round, jornadas[i].p_jornada_name,
+            jornadas[i].p_region_name, jornadas[i].p_division_name, jornadas[i].p_group_name,
+            jornadas[i].p_local_team_name, jornadas[i].p_visitant_team_name],
+                (err, rows, fields) => {
+                    if (!err) {
+                        res.json(rows[0])
+                    } else {
+                        console.log(err);
+                    }
+                });
+
+   
+
+        }
+
+
+
+
     },
 
     editJornadas: (req, res) => {
