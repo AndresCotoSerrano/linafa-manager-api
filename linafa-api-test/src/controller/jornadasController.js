@@ -3,8 +3,8 @@ const mysqlConnection = require('../db/database');
 module.exports = {
     insertJornadas: async (req, res) => {
 
-       jornadas = req.body;
-      //  var pjornadas= JSON.parse(jornadas);
+        jornadas = req.body;
+        //  var pjornadas= JSON.parse(jornadas);
         //console.log(pjornadas);
 
         for (var i in jornadas) {
@@ -21,13 +21,13 @@ module.exports = {
                     }
                 });
 
-   
+
 
         }
 
-        mysqlConnection.on('error', function(err) {
-            console.log("[mysql error]",err);
-          });
+        mysqlConnection.on('error', function (err) {
+            console.log("[mysql error]", err);
+        });
 
 
     },
@@ -49,9 +49,10 @@ module.exports = {
             });
     },
     showJornadas: (req, res) => {
-        const { p_region_name, p_division_name, p_group_name } = req.body;
+        const { region, division, grupo } = req.body;
+        console.log(req.body)
         let procedure = 'call jornadas_show_round(?,?,?)';
-        mysqlConnection.query(procedure, [p_region_name, p_division_name, p_group_name],
+        mysqlConnection.query(procedure, [region, division, grupo],
             (err, rows, fields) => {
                 if (!err) {
                     res.json(rows[0])
@@ -60,7 +61,19 @@ module.exports = {
                 }
             });
     },
-
+    jornadasReview: (req, res) => {
+        const { region, division, grupo } = req.body;
+        console.log(req.body)
+        let procedure = 'call jornadas_to_review(?,?,?)';
+        mysqlConnection.query(procedure, [region, division, grupo],
+            (err, rows, fields) => {
+                if (!err) {
+                    res.json(rows[0])
+                } else {
+                    console.log(err);
+                }
+            });
+    },
 
     uniqueJornada: (req, res) => {
         const { p_region_name, p_division_name, p_group_name } = req.body;
