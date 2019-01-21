@@ -33,13 +33,13 @@ module.exports = {
     },
 
     editJornadas: (req, res) => {
-        const { p_id, p_jornada_name, p_region_name, p_division_name, p_group_name, p_round,
-            p_jornada_date, p_place, p_match_hour, p_local_team_name, p_visitant_team_name, p_local_team_goals,
-            p_visitant_team_goals, p_need_revision, p_published } = req.body;
-        let procedure = 'call jornada_edit(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)';
-        mysqlConnection.query(procedure, [p_id, p_jornada_name, p_region_name, p_division_name, p_group_name, p_round,
-            p_jornada_date, p_place, p_match_hour, p_local_team_name, p_visitant_team_name, p_local_team_goals,
-            p_visitant_team_goals, p_need_revision, p_published],
+        const { id, jornada_name,jornada_number ,region_name, division_name, group_name, round,
+            jornada_date, place, match_hour, local_team_name, visitant_team_name, local_goals,
+            visitant_goals, need_revision, published } = req.body;
+        let procedure = 'call jornada_edit(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)';
+        mysqlConnection.query(procedure, [id, jornada_name,jornada_number, region_name, division_name, group_name, round,
+            jornada_date, place, match_hour, local_team_name, visitant_team_name, local_goals,
+            visitant_goals, need_revision, published],
             (err, rows, fields) => {
                 if (!err) {
                     res.json(rows[0])
