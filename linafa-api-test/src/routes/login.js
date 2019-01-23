@@ -4,7 +4,12 @@ const logincontroller = require('../controller/loginController');
 
 
 
+
+
 router.route('/')
-.post(logincontroller.validaLogin)
+    .post(logincontroller.validaLogin) 
+
+
+
 
 module.exports = router

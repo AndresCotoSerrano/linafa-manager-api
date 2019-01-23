@@ -2,9 +2,9 @@ const mysqlConnection = require('../db/database')
 
 module.exports = {
     insertTeams: (req, res) => {
-        const { name_team, id_region, id_division, id_group } = req.body;
+        const {name_team,region,division,group} = req.body;
         let procedure = 'call add_teams(?,?,?,?)'
-        mysqlConnection.query(procedure, [name_team, id_region, id_division, id_group], (err, rows, fields) => {
+        mysqlConnection.query(procedure, [name_team,region,division,group], (err, rows, fields) => {
             if (!err) {
                 res.json(rows[0]);
             } else {
@@ -25,5 +25,24 @@ module.exports = {
                 })
             }
         });
+    },
+
+
+    allTeams: (req, res) => {
+        const {region,division,group} = req.body;
+        console.log(division)
+        let procedure = 'call all_teams(?,?,?)'
+        mysqlConnection.query(procedure, [region,division,group], (err, rows, fields) => {
+            if (!err) {
+                res.json(rows[0]);
+                console.log(rows[0])
+            } else {
+                // res.json(rows[0]);
+                console.log('error')
+            }
+        });
     }
+
+
+    
 }

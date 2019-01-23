@@ -9,10 +9,10 @@ module.exports = {
 
         for (var i in jornadas) {
 
-            let procedure = 'call jornada_creation(?,?,?,?,?,?,?)';
+            let procedure = 'call jornada_creation(?,?,?,?,?,?,?,?)';
             mysqlConnection.query(procedure, [jornadas[i].p_round, jornadas[i].p_jornada_name,
             jornadas[i].p_region_name, jornadas[i].p_division_name, jornadas[i].p_group_name,
-            jornadas[i].p_local_team_name, jornadas[i].p_visitant_team_name],
+            jornadas[i].p_local_team_name, jornadas[i].p_visitant_team_name,i],
                 (err, rows, fields) => {
                     if (!err) {
                         res.json(rows[0])
