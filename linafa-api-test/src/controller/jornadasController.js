@@ -5,7 +5,7 @@ module.exports = {
 
         jornadas = req.body;
         //  var pjornadas= JSON.parse(jornadas);
-        //console.log(pjornadas);
+       console.log(jornadas[0].jornada_name);
 
         for (var i in jornadas) {
 
@@ -13,6 +13,39 @@ module.exports = {
             mysqlConnection.query(procedure, [jornadas[i].p_round, jornadas[i].p_jornada_name,
             jornadas[i].p_region_name, jornadas[i].p_division_name, jornadas[i].p_group_name,
             jornadas[i].p_local_team_name, jornadas[i].p_visitant_team_name,i],
+                (err, rows, fields) => {
+                    if (!err) {
+                        res.json(rows[0])
+                    } else {
+                        console.log(err);
+                    }
+                });
+
+
+
+        }
+
+        mysqlConnection.on('error', function (err) {
+            console.log("[mysql error]", err);
+        });
+
+
+    },
+
+
+
+    insertJornadasTwo: async (req, res) => {
+
+        jornadas = req.body;
+        //  var pjornadas= JSON.parse(jornadas);
+       console.log(jornadas[0].jornada_name);
+
+        for (var i in jornadas) {
+
+            let procedure = 'call jornada_creation(?,?,?,?,?,?,?,?)';
+            mysqlConnection.query(procedure, [jornadas[i].round, jornadas[i].jornada_name,
+            jornadas[i].region_name, jornadas[i].division_name, jornadas[i].group_name,
+            jornadas[i].local_team_name, jornadas[i].visitant_team_name,i],
                 (err, rows, fields) => {
                     if (!err) {
                         res.json(rows[0])
@@ -48,11 +81,29 @@ module.exports = {
                 }
             });
     },
-    showJornadas: (req, res) => {
+
+
+
+    jornadas_show_second_round: (req, res) => {
         const { region, division, grupo } = req.body;
+        console.log(req.body)
+        let procedure = 'call jornadas_show_second_round(?,?,?)';
+        mysqlConnection.query(procedure, [region, division, grupo],
+            (err, rows, fields) => {
+                if (!err) {
+                    res.json(rows[0])
+                } else {
+                    console.log(err);
+                }
+            });
+    },
+
+
+    showJornadas: (req, res) => {
+        const { region,division,grupo} = req.body;
         console.log(req.body)
         let procedure = 'call jornadas_show_round(?,?,?)';
-        mysqlConnection.query(procedure, [region, division, grupo],
+        mysqlConnection.query(procedure, [region,division,grupo],
             (err, rows, fields) => {
                 if (!err) {
                     res.json(rows[0])
@@ -61,11 +112,13 @@ module.exports = {
                 }
             });
     },
+
+
     jornadasReview: (req, res) => {
-        const { region, division, grupo } = req.body;
+        const { region, division,grupo } = req.body;
         console.log(req.body)
         let procedure = 'call jornadas_to_review(?,?,?)';
-        mysqlConnection.query(procedure, [region, division, grupo],
+        mysqlConnection.query(procedure, [region,division,grupo],
             (err, rows, fields) => {
                 if (!err) {
                     res.json(rows[0])
@@ -74,6 +127,37 @@ module.exports = {
                 }
             });
     },
+
+
+
+    sendToRevision: (req, res) => {
+        const { region,division,grupo} = req.body;
+        console.log(req.body)
+        let procedure = 'call send_to_revision(?,?,?)';
+        mysqlConnection.query(procedure, [region,division,grupo],
+            (err, rows, fields) => {
+                if (!err) {
+                    res.json(rows[0])
+                } else {
+                    console.log(err);
+                }
+            });
+    },
+
+    sentToPublish: (req, res) => {
+        const { region,division,grupo} = req.body;
+        console.log(req.body)
+        let procedure = 'call send_to_publish(?,?,?)';
+        mysqlConnection.query(procedure, [region,division,grupo],
+            (err, rows, fields) => {
+                if (!err) {
+                    res.json(rows[0])
+                } else {
+                    console.log(err);
+                }
+            });
+    },
+
 
     uniqueJornada: (req, res) => {
         const { p_region_name, p_division_name, p_group_name } = req.body;

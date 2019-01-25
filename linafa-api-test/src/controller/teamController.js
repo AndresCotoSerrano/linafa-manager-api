@@ -14,9 +14,10 @@ module.exports = {
         });
     },
     deleteTeams: (req, res) => {
-        const { p_name_team } = req.body;
+        const {id} = req.body;
+        console.log(id);
         let procedure = 'call delete_team(?)'
-        mysqlConnection.query(procedure, [p_name_team], (err, rows, fields) => {
+        mysqlConnection.query(procedure, [id], (err, rows, fields) => {
             if(!err){
                 res.json(rows[0]);
             }else{
@@ -41,6 +42,8 @@ module.exports = {
                 console.log('error')
             }
         });
+
+        
     }
 
 

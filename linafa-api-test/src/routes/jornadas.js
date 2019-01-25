@@ -9,7 +9,17 @@ router.route('/editarJornadas')
 router.route('/allJornadas')
     .post(jornadaController.showJornadas);
 router.route('/unicaJornada')
-    .post(jornadaController.uniqueJornada)
+    .post(jornadaController.uniqueJornada);
 router.route('/jornadasReview')
-    .post(jornadaController.jornadasReview)
+    .post(jornadaController.showJornadas);
+router.route('/jornadasSecondRound')
+    .post(jornadaController.jornadas_show_second_round);
+router.route('/insertJornadasTwo')
+    .post(jornadaController.insertJornadasTwo);
+router.route('/send_to_revision')
+    .post(jornadaController.sendToRevision);
+router.route('/send_to_publish')
+    .post(jornadaController.sentToPublish);
+
+
 module.exports = router

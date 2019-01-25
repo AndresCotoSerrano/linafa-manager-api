@@ -5,7 +5,7 @@ const teamController = require('../controller/teamController');
 router.route('/addTeam')
 .post(teamController.insertTeams);
 router.route('/deleteTeam')
-.delete(teamController.deleteTeams);
+.post(teamController.deleteTeams);
 router.route('/allTeams')
 .post(teamController.allTeams);
 
