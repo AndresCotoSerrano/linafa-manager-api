@@ -20,6 +20,11 @@ router.route('/send_to_revision')
     .post(jornadaController.sendToRevision);
 router.route('/send_to_publish')
     .post(jornadaController.sentToPublish);
+router.route('/ranking')
+    .post(jornadaController.ranking);   
+router.route('/showRanking')
+    .post(jornadaController.showRanking);   
+   
 
 
 module.exports = router

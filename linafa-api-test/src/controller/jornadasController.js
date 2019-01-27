@@ -83,6 +83,25 @@ module.exports = {
     },
 
 
+    ranking: (req, res) => {
+        const { region_name, division_name,
+             local_team_name, visitant_team_name, local_goals,
+            visitant_goals} = req.body;
+        let procedure = 'call ranking(?,?,?,?,?,?)';
+        mysqlConnection.query(procedure, [region_name, division_name,
+             local_team_name, visitant_team_name, local_goals,
+            visitant_goals],
+            (err, rows, fields) => {
+                if (!err) {
+                    res.json(rows[0])
+                } else {
+                    console.log(err);
+                }
+            });
+    },
+
+
+
 
     jornadas_show_second_round: (req, res) => {
         const { region, division, grupo } = req.body;
@@ -113,6 +132,20 @@ module.exports = {
             });
     },
 
+
+    showRanking: (req, res) => {
+        const { region,division,grupo} = req.body;
+        console.log(req.body)
+        let procedure = 'call show_ranking(?,?,?)';
+        mysqlConnection.query(procedure, [region,division,grupo],
+            (err, rows, fields) => {
+                if (!err) {
+                    res.json(rows[0])
+                } else {
+                    console.log(err);
+                }
+            });
+    },
 
     jornadasReview: (req, res) => {
         const { region, division,grupo } = req.body;
