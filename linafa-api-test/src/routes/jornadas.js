@@ -21,9 +21,13 @@ router.route('/send_to_revision')
 router.route('/send_to_publish')
     .post(jornadaController.sentToPublish);
 router.route('/ranking')
-    .post(jornadaController.ranking);   
+    .post(jornadaController.ranking); 
+ router.route('/reverseRanking')
+    .post(jornadaController.reverseRanking);    
 router.route('/showRanking')
-    .post(jornadaController.showRanking);   
+    .post(jornadaController.showRanking);  
+router.route('/showGeneralRanking')
+    .post(jornadaController.showGeneralRanking);
    
 
 

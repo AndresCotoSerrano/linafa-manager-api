@@ -4,7 +4,6 @@ module.exports = {
     insertJornadas: async (req, res) => {
 
         jornadas = req.body;
-        //  var pjornadas= JSON.parse(jornadas);
        console.log(jornadas[0].jornada_name);
 
         for (var i in jornadas) {
@@ -100,7 +99,24 @@ module.exports = {
             });
     },
 
+    
 
+    reverseRanking: (req, res) => {
+        const { region_name, division_name,
+             local_team_name, visitant_team_name, local_goals,
+            visitant_goals} = req.body;
+        let procedure = 'call reverse_ranking(?,?,?,?,?,?)';
+        mysqlConnection.query(procedure, [region_name, division_name,
+             local_team_name, visitant_team_name, local_goals,
+            visitant_goals],
+            (err, rows, fields) => {
+                if (!err) {
+                    res.json(rows[0])
+                } else {
+                    console.log(err);
+                }
+            });
+    },
 
 
     jornadas_show_second_round: (req, res) => {
@@ -132,6 +148,20 @@ module.exports = {
             });
     },
 
+
+    showGeneralRanking: (req, res) => {
+        const { region,division} = req.body;
+        console.log(req.body)
+        let procedure = 'call show_general_ranking(?,?)';
+        mysqlConnection.query(procedure, [region,division],
+            (err, rows, fields) => {
+                if (!err) {
+                    res.json(rows[0])
+                } else {
+                    console.log(err);
+                }
+            });
+    },
 
     showRanking: (req, res) => {
         const { region,division,grupo} = req.body;
