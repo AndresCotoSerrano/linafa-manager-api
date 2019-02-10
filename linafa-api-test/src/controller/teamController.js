@@ -13,6 +13,7 @@ module.exports = {
             }
         });
     },
+    
     deleteTeams: (req, res) => {
         const {id} = req.body;
         console.log(id);
@@ -41,11 +42,6 @@ module.exports = {
                 // res.json(rows[0]);
                 console.log('error')
             }
-        });
-
-        
-    }
-
-
-    
+        });   
+    }    
 }
