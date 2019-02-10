@@ -15,16 +15,14 @@ module.exports = {
     },
     
     deleteTeams: (req, res) => {
-        const {id} = req.body;
-        console.log(id);
-        let procedure = 'call delete_team(?)'
-        mysqlConnection.query(procedure, [id], (err, rows, fields) => {
+        const {region,division,group} = req.body;
+        console.log(region,division,group);
+        let procedure = 'call delete_all_teams(?,?,?)'
+        mysqlConnection.query(procedure, [region,division,group], (err, rows, fields) => {
             if(!err){
                 res.json(rows[0]);
             }else{
-                res.json({
-                    "msg":"equipo no existe"
-                })
+               
             }
         });
     },
