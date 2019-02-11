@@ -4,14 +4,14 @@ module.exports = {
     insertJornadas: async (req, res) => {
 
         jornadas = req.body;
-       console.log(jornadas[0].jornada_name);
+        console.log(jornadas[0].jornada_name);
 
         for (var i in jornadas) {
 
             let procedure = 'call jornada_creation(?,?,?,?,?,?,?,?)';
             mysqlConnection.query(procedure, [jornadas[i].p_round, jornadas[i].p_jornada_name,
             jornadas[i].p_region_name, jornadas[i].p_division_name, jornadas[i].p_group_name,
-            jornadas[i].p_local_team_name, jornadas[i].p_visitant_team_name,i],
+            jornadas[i].p_local_team_name, jornadas[i].p_visitant_team_name, i],
                 (err, rows, fields) => {
                     if (!err) {
                         res.json(rows[0])
@@ -28,7 +28,6 @@ module.exports = {
             console.log("[mysql error]", err);
         });
 
-
     },
 
 
@@ -37,14 +36,14 @@ module.exports = {
 
         jornadas = req.body;
         //  var pjornadas= JSON.parse(jornadas);
-       console.log(jornadas[0].jornada_name);
+        console.log(jornadas[0].jornada_name);
 
         for (var i in jornadas) {
 
             let procedure = 'call jornada_creation(?,?,?,?,?,?,?,?)';
             mysqlConnection.query(procedure, [jornadas[i].round, jornadas[i].jornada_name,
             jornadas[i].region_name, jornadas[i].division_name, jornadas[i].group_name,
-            jornadas[i].local_team_name, jornadas[i].visitant_team_name,i],
+            jornadas[i].local_team_name, jornadas[i].visitant_team_name, i],
                 (err, rows, fields) => {
                     if (!err) {
                         res.json(rows[0])
@@ -65,11 +64,11 @@ module.exports = {
     },
 
     editJornadas: (req, res) => {
-        const { id, jornada_name,jornada_number ,region_name, division_name, group_name, round,
+        const { id, jornada_name, jornada_number, region_name, division_name, group_name, round,
             jornada_date, place, match_hour, local_team_name, visitant_team_name, local_goals,
             visitant_goals, need_revision, published } = req.body;
         let procedure = 'call jornada_edit(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)';
-        mysqlConnection.query(procedure, [id, jornada_name,jornada_number, region_name, division_name, group_name, round,
+        mysqlConnection.query(procedure, [id, jornada_name, jornada_number, region_name, division_name, group_name, round,
             jornada_date, place, match_hour, local_team_name, visitant_team_name, local_goals,
             visitant_goals, need_revision, published],
             (err, rows, fields) => {
@@ -84,11 +83,11 @@ module.exports = {
 
     ranking: (req, res) => {
         const { region_name, division_name,
-             local_team_name, visitant_team_name, local_goals,
-            visitant_goals} = req.body;
+            local_team_name, visitant_team_name, local_goals,
+            visitant_goals } = req.body;
         let procedure = 'call ranking(?,?,?,?,?,?)';
         mysqlConnection.query(procedure, [region_name, division_name,
-             local_team_name, visitant_team_name, local_goals,
+            local_team_name, visitant_team_name, local_goals,
             visitant_goals],
             (err, rows, fields) => {
                 if (!err) {
@@ -99,15 +98,15 @@ module.exports = {
             });
     },
 
-    
+
 
     reverseRanking: (req, res) => {
         const { region_name, division_name,
-             local_team_name, visitant_team_name, local_goals,
-            visitant_goals} = req.body;
+            local_team_name, visitant_team_name, local_goals,
+            visitant_goals } = req.body;
         let procedure = 'call reverse_ranking(?,?,?,?,?,?)';
         mysqlConnection.query(procedure, [region_name, division_name,
-             local_team_name, visitant_team_name, local_goals,
+            local_team_name, visitant_team_name, local_goals,
             visitant_goals],
             (err, rows, fields) => {
                 if (!err) {
@@ -135,10 +134,10 @@ module.exports = {
 
 
     showJornadas: (req, res) => {
-        const { region,division,grupo} = req.body;
+        const { region, division, grupo } = req.body;
         console.log(req.body)
         let procedure = 'call jornadas_show_round(?,?,?)';
-        mysqlConnection.query(procedure, [region,division,grupo],
+        mysqlConnection.query(procedure, [region, division, grupo],
             (err, rows, fields) => {
                 if (!err) {
                     res.json(rows[0])
@@ -150,10 +149,10 @@ module.exports = {
 
 
     showGeneralRanking: (req, res) => {
-        const { region,division} = req.body;
+        const { region, division } = req.body;
         console.log(req.body)
         let procedure = 'call show_general_ranking(?,?)';
-        mysqlConnection.query(procedure, [region,division],
+        mysqlConnection.query(procedure, [region, division],
             (err, rows, fields) => {
                 if (!err) {
                     res.json(rows[0])
@@ -164,10 +163,10 @@ module.exports = {
     },
 
     showRanking: (req, res) => {
-        const { region,division,grupo} = req.body;
+        const { region, division, grupo } = req.body;
         console.log(req.body)
         let procedure = 'call show_ranking(?,?,?)';
-        mysqlConnection.query(procedure, [region,division,grupo],
+        mysqlConnection.query(procedure, [region, division, grupo],
             (err, rows, fields) => {
                 if (!err) {
                     res.json(rows[0])
@@ -178,10 +177,10 @@ module.exports = {
     },
 
     jornadasReview: (req, res) => {
-        const { region, division,grupo } = req.body;
+        const { region, division, grupo } = req.body;
         console.log(req.body)
         let procedure = 'call jornadas_to_review(?,?,?)';
-        mysqlConnection.query(procedure, [region,division,grupo],
+        mysqlConnection.query(procedure, [region, division, grupo],
             (err, rows, fields) => {
                 if (!err) {
                     res.json(rows[0])
@@ -194,10 +193,10 @@ module.exports = {
 
 
     sendToRevision: (req, res) => {
-        const { region,division,grupo} = req.body;
+        const { region, division, grupo } = req.body;
         console.log(req.body)
         let procedure = 'call send_to_revision(?,?,?)';
-        mysqlConnection.query(procedure, [region,division,grupo],
+        mysqlConnection.query(procedure, [region, division, grupo],
             (err, rows, fields) => {
                 if (!err) {
                     res.json(rows[0])
@@ -208,10 +207,10 @@ module.exports = {
     },
 
     sentToPublish: (req, res) => {
-        const { region,division,grupo} = req.body;
+        const { region, division, grupo } = req.body;
         console.log(req.body)
         let procedure = 'call send_to_publish(?,?,?)';
-        mysqlConnection.query(procedure, [region,division,grupo],
+        mysqlConnection.query(procedure, [region, division, grupo],
             (err, rows, fields) => {
                 if (!err) {
                     res.json(rows[0])
